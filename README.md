@@ -21,7 +21,7 @@ vagrant up
 Due to a bug in Cumulus Linux 2.5.5, make the following change to fix the interfaces.
 
 1. `vagrant ssh cr1`
-2. `sudo vi sudo vi /etc/network/interfaces`
+2. `sudo vi /etc/network/interfaces`
 3. Add `netmask 255.255.255.0` for interfaces `swp1`, `swp2`, `swp3`.
 4. `sudo service networking restart`
 
