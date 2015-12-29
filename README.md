@@ -8,6 +8,9 @@ peered routers, servers, and clients. All the routers use Quagga for BGP.
 2. Cumulus Linux: Follow steps at [Setting Up the Vagrant Environment](https://docs.cumulusnetworks.com/display/VX/Using+Cumulus+VX+with+Vagrant#UsingCumulusVXwithVagrant-SettingUptheVagrantEnvironment)
 to download and add Cumulus Linux vagrant box.
 
+I use Cumulus Linux as support for flow based multipath routing is lacking in kernels shipped 
+with commodity Linux distros. 
+
 ## Getting Started
 
 ```
