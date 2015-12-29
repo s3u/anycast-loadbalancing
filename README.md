@@ -41,6 +41,8 @@ default via 10.0.2.2 dev eth0
 	nexthop via 10.10.13.13  dev swp3 weight 1
 ```
 
+The last three lines show the routes to our anycast server.
+
 ## Topology
 
 The above steps bring up the following nodes: 
