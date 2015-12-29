@@ -54,6 +54,7 @@ The above steps bring up the following nodes:
 2. r2 and r3: Two Ubuntu 14.04 routers peering with cr1 via BGP.
 3. s1: Server with anycast IP of `10.30.1.3` with r2 as the default gateway.
 4. s2: Server with anycast IP of `10.30.1.3` with r3 as the default gateway.
+5. u1 and u2: Test clients
 
 Both s1 and s2 run nginx that prints the hostname in response to a `GET`.
 
