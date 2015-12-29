@@ -18,7 +18,7 @@ git clone https://github.com/s3u/vagrant-anycast-bgp.git
 cd vagrant-anycast-bgp
 vagrant up
 ```
-Due to a bug in Cumulus Linux 2.5.5, make the following change.
+Due to a bug in Cumulus Linux 2.5.5, make the following change to fix the interfaces.
 
 1. `vagrant ssh cr1`
 2. `sudo vi sudo vi /etc/network/interfaces`
@@ -43,9 +43,9 @@ default via 10.0.2.2 dev eth0
 
 ## Topology
 
-The above steps bring up The topology in this example consists of the following:
+The above steps bring up the following nodes: 
 
-1. cr1: A Cumulus 2.5.5 router that client nodes u1 and u2 connect to. 
+1. cr1: A Cumulus Linux 2.5.5 router that client nodes u1 and u2 use as the gateway. 
 2. r2 and r3: Two Ubuntu 14.04 routers peering with cr1 via BGP.
 3. s1: Server with anycast IP of `10.30.1.3` with r2 as the default gateway.
 4. s2: Server with anycast IP of `10.30.1.3` with r3 as the default gateway.
