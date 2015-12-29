@@ -2,7 +2,7 @@
 The topology in this experiment demonstrates anycast based loadbalancing using a set of BGP 
 peered routers, servers, and clients. All the routers use Quagga for BGP. The technique here
 is similar to Cloudflare's 
-[Load Balancing without Load Balancers](https://blog.cloudflare.com/cloudflares-architecture-eliminating-single-p/).2
+[Load Balancing without Load Balancers](https://blog.cloudflare.com/cloudflares-architecture-eliminating-single-p/).
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@ is similar to Cloudflare's
 2. Cumulus Linux: Follow steps at [Setting Up the Vagrant Environment](https://docs.cumulusnetworks.com/display/VX/Using+Cumulus+VX+with+Vagrant#UsingCumulusVXwithVagrant-SettingUptheVagrantEnvironment)
 to download and add Cumulus Linux vagrant box.
 
-I use Cumulus Linux as support for flow based multipath routing is lacking in kernels shipped 
+I use Cumulus Linux here as support for flow based multipath routing is lacking in kernels shipped 
 with commodity Linux distros. 
 
 ## Getting Started
@@ -20,7 +20,8 @@ git clone https://github.com/s3u/vagrant-anycast-bgp.git
 cd vagrant-anycast-bgp
 vagrant up
 ```
-Due to a bug in Cumulus Linux 2.5.5, make the following change to fix the interfaces.
+Make the following change to fix the interfaces to work around bug in Vagrant provisioning of 
+Cumulus Linux 2.5.5, 
 
 1. `vagrant ssh cr1`
 2. `sudo vi /etc/network/interfaces`
@@ -72,6 +73,13 @@ Note these two printing `s1` or `s2` in a loop.
 
 While this is going on, suspend r2 to see clients continue to get traffic served.
 
+```
+vagrant suspend r2
+```
+
+Both terminals start printing `s2` as `s1` is no longer reachable. Then `vagrant resume r2` and 
+`vagrant suspend r3` to see both terminals print `s1`.
+
 These tests demonstrate two things:
 
 1. Traffic balanced between the servers s1 and s2
@@ -79,13 +87,6 @@ These tests demonstrate two things:
 
 In the real-world you would write a healthchecker to detect failures of our anycast nodes and 
 withdraw their routes from upstream routers. This is entirely programmable.
-
-```
-vagrant suspend r2
-```
-
-Both terminals start printing `s2` as `s1` is no longer reachable. Then resume r2 and suspend r3 to see both terminals
-print `s1`.
 
 ## Credits
 
