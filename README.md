@@ -1,6 +1,8 @@
 
 The topology in this experiment demonstrates anycast based loadbalancing using a set of BGP 
-peered routers, servers, and clients. All the routers use Quagga for BGP.
+peered routers, servers, and clients. All the routers use Quagga for BGP. The technique here
+is similar to Cloudflare's 
+[Load Balancing without Load Balancers](https://blog.cloudflare.com/cloudflares-architecture-eliminating-single-p/).2
 
 ## Prerequisites
 
@@ -68,7 +70,15 @@ vagrant ssh u2 -c "while true; do curl 10.30.1.3;done"
 
 Note these two printing `s1` or `s2` in a loop.
 
-While this is going on, suspend r2.
+While this is going on, suspend r2 to see clients continue to get traffic served.
+
+These tests demonstrate two things:
+
+1. Traffic balanced between the servers s1 and s2
+2. Graceful failover without middle boxes
+
+In the real-world you would write a healthchecker to detect failures of our anycast nodes and 
+withdraw their routes from upstream routers. This is entirely programmable.
 
 ```
 vagrant suspend r2
